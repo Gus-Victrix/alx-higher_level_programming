@@ -9,4 +9,4 @@ def fizzbuzz():
             a = "Buzz"
         else:
             a = str(i)
-        print(f"{a:s}", end = " ")
+        print(f"{a:s}", end=" ")
