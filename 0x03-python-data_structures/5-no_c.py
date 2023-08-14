@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 def no_c(my_string):
-    for letters in my_string:
-        if letters == 'c' or letters == 'C':
+    new_string = my_string
+    for letters in new_string:
+        if ord(letters) == ord("c") or ord(letters) == ord('C'):
             del letters
-    return my_string
+    return new_string
