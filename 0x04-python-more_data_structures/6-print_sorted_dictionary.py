@@ -9,5 +9,5 @@ def print_sorted_dictionary(a_dictionary):
     >>> language: C
     >>> track: Low level
     '''
-    for key, value in a_dictionary.items():
-        print(key, value)
+    for key, value in sorted(a_dictionary.items()):
+        print("{:s}: {}".format(key, value))
