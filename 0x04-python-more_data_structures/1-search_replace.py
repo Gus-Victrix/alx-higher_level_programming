@@ -7,4 +7,3 @@ def search_replace(my_list, search, replace):
     >>> [1, 89, 3, 4, 5]
     '''
     return [n if n != search else replace for n in my_list]
-
