@@ -1,0 +1,162 @@
+The ``add_integer`` module
+======================
+
+Using ``add_integer``
+-------------------
+
+This is an example text file in reStructuredText format.  First import
+``add_integer`` from the ``add_integer`` module:
+
+    >>> add_integer = __import__('0-add_integer').add_integer
+
+Now use it:
+
+======================
+Doc Test             |
+======================
+
+    >>> len(__import__("0-add_integer").add_integer.__doc__) > 1
+    True
+
+    >>> len(__import__("0-add_integer").__doc__) > 1
+    True
+
+======================
+Typical Test         |
+======================
+
+Int one
+----------------------
+
+    >>> add_integer(1, 3)
+    4
+
+    >>> add_integer(1, -3)
+    -2
+
+    >>> add_integer(-1, 3)
+    2
+
+    >>> add_integer(1)
+    99
+
+    >>> add_integer(-2)
+    96
+
+Float one
+----------------------
+
+    >>> add_integer(1, 3.36)
+    4
+
+    >>> add_integer(1.34, 3)
+    4
+
+    >>> add_integer(1, -3.36)
+    -2
+
+    >>> add_integer(-2.5)
+    96
+
+    >>> add_integer(-1.5, -2.5)
+    -3
+
+======================
+Error case           |
+======================
+
+Error Type
+----------------------
+
+    >>> add_integer("School", 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    >>> add_integer(2, "School")
+    Traceback (most recent call last):
+    ...
+    TypeError: b must be an integer
+
+    >>> add_integer("3", "3")
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    >>> add_integer()
+    Traceback (most recent call last):
+    ...
+    TypeError: add_integer() missing 1 required positional argument: 'a'
+
+    >>> add_integer(3, 3, 4)
+    Traceback (most recent call last):
+    ...
+    TypeError: add_integer() takes from 1 to 2 positional arguments but 3 were given
+
+    >>> add_integer(3, None)
+    Traceback (most recent call last):
+    ...
+    TypeError: b must be an integer
+
+    >>> add_integer(None, 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    >>> add_integer(None, None)
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    >>> add_integer(None)
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    >>> add_integer([2, 3, 4], 3)
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+Error Overflow
+----------------------
+
+    >>> add_integer(2, float('inf'))
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float('inf'), 2)
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float("inf"), float("-inf"))
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float("-inf"), float("-inf"))
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float("-inf"), float("inf"))
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float("-inf"), 3)
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(3, float("-inf"))
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(3, float("nan"))
+    Traceback (most recent call last):
+    ...
+    ValueError: cannot convert float NaN to integer
