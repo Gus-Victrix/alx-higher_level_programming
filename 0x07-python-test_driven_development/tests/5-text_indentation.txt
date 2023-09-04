@@ -1,0 +1,122 @@
+The ``text_indentation`` module
+======================
+
+Using ``text_indentation``
+-------------------
+
+This is an example text file in reStructuredText format.  First import
+``text_indentation`` from the ``text_indentation`` module:
+
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Now use it:
+
+======================
+Doc Test             |
+======================
+
+    >>> len(__import__("5-text_indentation").text_indentation.__doc__) > 1
+    True
+
+    >>> len(__import__("5-text_indentation").__doc__) > 1
+    True
+
+======================
+Typical Test         |
+======================
+
+    >>> text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? Non autem hoc: igitur ne illud quidem.")
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <BLANKLINE>
+    Quonam modo?
+    <BLANKLINE>
+    Utrum igitur tibi litteram videor an totas paginas commovere?
+    <BLANKLINE>
+    Non autem hoc:
+    <BLANKLINE>
+    igitur ne illud quidem.
+    <BLANKLINE>
+
+    >>> text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? Non autem hoc:                                           igitur ne illud quidem.")
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <BLANKLINE>
+    Quonam modo?
+    <BLANKLINE>
+    Utrum igitur tibi litteram videor an totas paginas commovere?
+    <BLANKLINE>
+    Non autem hoc:
+    <BLANKLINE>
+    igitur ne illud quidem.
+    <BLANKLINE>
+
+    >>> text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? Non autem hoc: igitur ne illud quidem. Salut je m'envol ")
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <BLANKLINE>
+    Quonam modo?
+    <BLANKLINE>
+    Utrum igitur tibi litteram videor an totas paginas commovere?
+    <BLANKLINE>
+    Non autem hoc:
+    <BLANKLINE>
+    igitur ne illud quidem.
+    <BLANKLINE>
+    Salut je m'envol 
+
+    >>> text_indentation("           Lorem ipsum dolor sit amet, consectetur adipiscing elit. ")
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <BLANKLINE>
+
+    >>> text_indentation("Serait-ce possible d'avoir des bon mate sur lol ?" + "Parce que ça va deux seconde de se faire" + "int sa game avec une botlane nulle.")
+    Serait-ce possible d'avoir des bon mate sur lol ?
+    <BLANKLINE>
+    Parce que ça va deux seconde de se faireint sa game avec une botlane nulle.
+    <BLANKLINE>
+
+    >>> text_indentation(",;;,;:?,;")
+    ,;;,;:
+    <BLANKLINE>
+    ?
+    <BLANKLINE>
+    ,;
+
+    >>> text_indentation("Salut je suis a Holberton. Cette école est trop cool?           Oui totalement")
+    Salut je suis a Holberton.
+    <BLANKLINE>
+    Cette école est trop cool?
+    <BLANKLINE>
+    Oui totalement
+
+======================
+Error case           |
+======================
+
+Error Type
+----------------------
+
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+
+    >>> text_indentation(12)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+
+    >>> text_indentation([1,2,3])
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+
+Error Argu
+----------------------
+
+    >>> text_indentation("Salut", "Salut")
+    Traceback (most recent call last):
+    ...
+    TypeError: text_indentation() takes 1 positional argument but 2 were given
+
+    >>> text_indentation()
+    Traceback (most recent call last):
+    ...
+    TypeError: text_indentation() missing 1 required positional argument: 'text'
