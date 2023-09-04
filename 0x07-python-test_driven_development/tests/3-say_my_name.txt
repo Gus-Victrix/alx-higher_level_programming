@@ -1,0 +1,105 @@
+The ``say_my_name`` module
+======================
+
+Using ``say_my_name``
+-------------------
+
+This is an example text file in reStructuredText format.  First import
+``say_my_name`` from the ``say_my_name`` module:
+
+    >>> say_my_name = __import__('3-say_my_name').say_my_name
+
+Now use it:
+
+======================
+Doc Test             |
+======================
+
+    >>> len(__import__("3-say_my_name").say_my_name.__doc__) > 1
+    True
+
+    >>> len(__import__("3-say_my_name").__doc__) > 1
+    True
+
+======================
+Typical Test         |
+======================
+
+    >>> say_my_name("Mickael", "Boillaud")
+    My name is Mickael Boillaud
+
+    >>> say_my_name("Mickael")
+    My name is Mickael 
+
+    >>> say_my_name("", "")
+    My name is  
+
+======================
+Error case           |
+======================
+
+Error Argu
+----------------------
+
+    >>> say_my_name("Mickael", "Alexandre", "René", "Boillaud")
+    Traceback (most recent call last):
+    ...
+    TypeError: say_my_name() takes from 1 to 2 positional arguments but 4 were given
+
+    >>> say_my_name("Mickael", "Alexandre", "Boillaud")
+    Traceback (most recent call last):
+    ...
+    TypeError: say_my_name() takes from 1 to 2 positional arguments but 3 were given
+
+    >>> say_my_name()
+    Traceback (most recent call last):
+    ...
+    TypeError: say_my_name() missing 1 required positional argument: 'first_name'
+
+Error Type
+----------------------
+
+    >>> say_my_name(None, "Boillaud")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    >>> say_my_name("Mickael", None)
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+    >>> say_my_name(None, None)
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    >>> say_my_name(12, "Boillaud")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    >>> say_my_name("Mickael", 12)
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+    >>> say_my_name([1, 3, 4], "Boillaud")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    >>> say_my_name(tuple, "Boillaud")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+    >>> say_my_name((2, 3), "Boillaud")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+    
+    >>> say_my_name("Mickael", (3, 4))
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
