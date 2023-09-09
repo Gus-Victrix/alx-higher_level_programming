@@ -32,5 +32,5 @@ def text_indentation(text):
             buf = ""
     if buf != "":
         while buf != "" and buf[0] == " ":
-                buf = buf[1:]
+            buf = buf[1:]
         print("{}".format(buf), end="")
