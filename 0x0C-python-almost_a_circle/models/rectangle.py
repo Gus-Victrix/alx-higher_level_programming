@@ -136,3 +136,8 @@ class Rectangle(Base):
         '''
         return self.__width * self.__height
 
+    def display(self):
+        ''' Prints the rectangle instance using specified symbol (#)default.'''
+        for i in range(self.__height):
+            print("{}".format("#" * self.__width))
+        return
