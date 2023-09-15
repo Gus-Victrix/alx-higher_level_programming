@@ -16,3 +16,21 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+        return
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        import json
+        '''
+        Creates JSON string representation of the input.
+
+        Args:
+            list_dictionaries (list of dictionaries): The input dictionaries.
+
+        Returns:
+            JSON representation of list_dictionaries.
+        '''
+        if list_dictionaries is None or len(list_dictionaries) == 0:
+            return "[]"
+        else:
+            return json.dumps(list_dictionaries)
