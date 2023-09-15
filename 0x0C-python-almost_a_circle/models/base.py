@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+'''This module defines the Base class of this project.'''
+import json
 
 class Base:
     '''The base class of this project, tracks objects via id.'''
@@ -20,7 +22,6 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        import json
         '''
         Creates JSON string representation of the input.
 
@@ -50,6 +51,19 @@ class Base:
                 list_dictionaries.append(cls.to_dictionary(obj))
         with open(filename, "w+", encoding='utf-8') as f:
             f.write(cls.to_json_string(list_dictionaries))
-
         return
 
+    @staticmethod
+    def from_json_string(json_string):
+        '''
+        Converts a json string into a dictionary list.
+
+        Args:
+            json_string (string): String representation of a dictionary list.
+
+        Returs:
+            List formed from the JSON string.
+        '''
+        if json_string is not None and json_string != "":
+            return json.loads(json_string)
+        return []
