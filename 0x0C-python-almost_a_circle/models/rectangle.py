@@ -153,3 +153,25 @@ class Rectangle(Base):
         return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, \
                 self.__x, self.__y, self.__width, self.__height)
 
+    def update(self, *args):
+        '''
+        Mutates all attributes of a rectangle object in one go.
+
+        Args:
+            args (list): The order of the list is: id, width, height, x, and y.
+        '''
+        if len(args):
+            i = 0
+            for a in args:
+                if i == 0:
+                    self.id = a
+                if i == 1:
+                    self.__width = a
+                if i == 2:
+                    self.__height = a
+                if i == 3:
+                    self.__x = a
+                if i == 4:
+                    self.__y = a
+                i += 1
+        return
