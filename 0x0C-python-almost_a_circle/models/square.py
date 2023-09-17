@@ -2,6 +2,7 @@
 '''This module defines the class square'''
 from models.rectangle import Rectangle
 
+
 class Square(Rectangle):
     '''This is a template for square objects.'''
     def __init__(self, size, x=0, y=0, id=None):
@@ -25,7 +26,10 @@ class Square(Rectangle):
         Returns:
             String representation of the object.
         '''
-        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y,
+        return "[Square] ({}) {}/{} - {}".format(
+                self.id,
+                self.x,
+                self.y,
                 self.width)
 
     @property
@@ -83,6 +87,7 @@ class Square(Rectangle):
             if 'y' in kwargs:
                 self.y = kwargs['y']
         return
+
     def to_dictionary(self):
         '''
         Creates a dictionary representation of the square object.

@@ -1,6 +1,8 @@
 #!/usr/bin/python3
+'''This module defines the Rectangle Class and it's associated methods.'''
 
 from models.base import Base
+
 
 class Rectangle(Base):
     '''Template for Rectangle objects.'''
@@ -150,8 +152,12 @@ class Rectangle(Base):
         Returns:
             The string representing the rectangle object.
         '''
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, \
-                self.__x, self.__y, self.__width, self.__height)
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(
+                self.id,
+                self.__x,
+                self.__y,
+                self.__width,
+                self.__height)
 
     def update(self, *args, **kwargs):
         '''
