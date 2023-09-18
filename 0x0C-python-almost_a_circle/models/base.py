@@ -157,6 +157,7 @@ class Base:
         except FileExistsError:
             return []
 
+    @staticmethod
     def draw(list_rectangles, list_squares):
         """
         Draw the given rectangle, or square
