@@ -98,9 +98,10 @@ class Base:
         filename = cls.__name__ + ".json"
         temp = []
 
-        with open(filename, "r+", encoding="utf-8") as f:
-            for a in cls.from_json_string(f.read()):
-                temp.append(cls.create(**a))
+        try:
+            with open(filename, "r+", encoding="utf-8") as f:
+                for a in cls.from_json_string(f.read()):
+                    temp.append(cls.create(**a))
         except FileExistsError:
             return []
         return temp
