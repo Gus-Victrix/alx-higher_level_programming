@@ -11,7 +11,6 @@ class Node:
         Args:
             data (int): The data of the node
             next_node (Node): The next node
-        Return: Nothing
         """
         self.data = data
         self.next_node = next_node
