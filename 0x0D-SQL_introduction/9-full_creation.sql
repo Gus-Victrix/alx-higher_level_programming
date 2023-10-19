@@ -1,9 +1,7 @@
 -- Create table named second_table and add data.
-USE `hbtn_0c_0`;
-
 CREATE TABLE IF NOT EXISTS `second_table`
 (
-	'id` int,
+	`id` int,
 	`name` varchar(256),
 	`score` int
 );
