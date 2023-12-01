@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 # Showing size of http response to input socket
 if [ -z "$1" ] ; then
 	echo "No url"
