@@ -1,3 +1,3 @@
 #!/bin/bash
-# Displaying body of GET response
-curl -s -H "X-School-User-Id=98" -X GET "$1"
+#Create a curl requests with data in the header
+curl -sH 'X-School-User-Id: 98' "$1"
