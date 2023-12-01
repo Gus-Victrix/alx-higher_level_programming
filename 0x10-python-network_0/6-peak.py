@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 '''
 This module defines a function to find a peak in a list of unsorted ints.
 '''
