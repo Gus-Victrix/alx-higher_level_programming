@@ -1,3 +1,3 @@
 #!/bin/bash
-# Checking only status code of the response.
-curl -s -w '%{http_code}\n' "$1" -o /dev/null
+#Create a curl requests with data in the header
+curl -s -o /dev/null -w "%{http_code}" "$1"
