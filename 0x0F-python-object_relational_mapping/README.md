@@ -1,14 +1,14 @@
-# 0x0F. Python - Object-relational mapping
+# 0x0F. `Python` - Object-relational mapping
 
 `Python` `OOP` `SQL` `MySQL` `ORM` `SQLAlchemy`
 
 ## Learnt Concepts:
- - How to connect to a `MySQL` database from a Python script.
- - How to `SELECT` rows in a mysql table from a python script.
- - How to insert rows in a mysql table from a python script.
+ - How to connect to a `MySQL` database from a `Python` script.
+ - How to `SELECT` rows in a `MySQL` table from a `Python` script.
+ - How to `INSERT` rows in a `MySQL` table from a `Python` script.
  - What orm means.
- - How to map  python Class to a mysql table.
- - How to create a python Virtual Environment.
+ - How to map  `Python` Class to a `MySQL` table.
+ - How to create a `Python` Virtual Environment.
 
 ## Toolkit used:
  - `Ubuntu 20.04 LTS` (Building and Testing)
