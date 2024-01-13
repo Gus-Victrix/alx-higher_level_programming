@@ -15,16 +15,15 @@ if __name__ == "__main__":  # Execute only if run as script
         sys.exit(1)  # Exit with error
 
     conn = MySQLdb.connect(  # Connecting to MySQL database
+                host="localhost",  # Location of the db
+                port=3306,  # Port to be used for connections
                 user=sys.argv[1],  # The database username.
                 passwd=sys.argv[2],  # User password.
-                host="localhost",  # Location of the db
-                charset="utf8",  # Character set used in the database.
-                port=3306,  # Port to be used for connections
-                db=sys.argv[3])  # Database to be used for connection.
+                db=sys.argv[3],  # Database to be used for connection.
+                charset="utf8")  # Character set used in the database.
     cur = conn.cursor()  # Creating cursor object
-    # Execute the query to the database
-    rows = cur.execute(f"SELECT * FROM states WHERE name = '{argv[4]}'\
-            ORDER BY id ASC;")
+    rows = cur.execute(f"SELECT * FROM states WHERE name = '{sys.argv[4]}'\
+            ORDER BY id ASC")  # Execute the query to the database
     for row in rows:  # Loop through all rows
         print(row)  # Print each row
 
