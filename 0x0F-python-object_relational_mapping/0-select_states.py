@@ -30,9 +30,10 @@ if __name__ == "__main__":
             port=3306)  # Connecting to specified database in terminal.
 
     cursor = db.cursor()  # Creating cursor to traverse the database.
-    cursor.execute("SELECT * FROM states ORDER BY states.id")  # Getting states
+    cursor.execute("SELECT * FROM states ORDER BY id ASC")  # Getting states
     rows = cursor.fetchall()  # Listing all retrieved rows.
     for row in rows:  # Printing all the rows.
         print(row)
 
+    cursor.close()  # Closing the cursor.
     db.close()  # Closing the connection to the database.
