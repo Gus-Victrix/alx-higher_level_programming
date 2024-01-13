@@ -20,20 +20,19 @@ if __name__ == "__main__":
         print(__doc__)
         sys.exit(1)
 
-    user_name, password, database = sys.argv[1:]  # Extracting cmd_line args
-    db = ms.connect(
+    conn = ms.connect(
             host="localhost",
-            user=user_name,
-            passwd=password,
-            db=database,
+            user=sys.argv[1],
+            passwd=sys.argv[2],
+            db=sys.argv[3],
             charset="utf8",
             port=3306)  # Connecting to specified database in terminal.
 
-    cursor = db.cursor()  # Creating cursor to traverse the database.
+    cursor = conn.cursor()  # Creating cursor to traverse the database.
     cursor.execute("SELECT * FROM states ORDER BY id ASC")  # Getting states
     rows = cursor.fetchall()  # Listing all retrieved rows.
     for row in rows:  # Printing all the rows.
         print(row)
 
     cursor.close()  # Closing the cursor.
-    db.close()  # Closing the connection to the database.
+    conn.close()  # Closing the connection to the database.
