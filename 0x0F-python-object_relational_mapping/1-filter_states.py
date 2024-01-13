@@ -20,7 +20,7 @@ if __name__ == "__main__":  # import guard
         user=sys.argv[1],  # user supplied username
         passwd=sys.argv[2],  # user supplied password
         db=sys.argv[3],  # user supplied database name
-        charset="utf8",  # set encoding
+        charset="utf8"  # set encoding
     )
 
     cur = conn.cursor()  # create cursor object
@@ -30,7 +30,8 @@ if __name__ == "__main__":  # import guard
     rows = cur.fetchall()  # store query results in rows variable
 
     for row in rows:  # iterate through rows variable
-        print(row)
+        if row[1][0] == 'N': # check if first letter of name is 'N'
+            print(row)
 
     cur.close()  # close cursor
     conn.close()  # close connection to database
