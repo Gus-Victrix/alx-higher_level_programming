@@ -30,7 +30,7 @@ if __name__ == "__main__":  # import guard
     rows = cur.fetchall()  # store query results in rows variable
 
     for row in rows:  # iterate through rows variable
-        if row[1][0] == 'N': # check if first letter of name is 'N'
+        if row[1][0] == 'N':  # check if first letter of name is 'N'
             print(row)
 
     cur.close()  # close cursor
