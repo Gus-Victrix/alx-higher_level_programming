@@ -15,12 +15,12 @@ if __name__ == "__main__":  # Execute only if run as script
         sys.exit(1)  # Exit with error
 
     conn = MySQLdb.connect(  # Connecting to MySQL database
-                username=argv[1],  # The database username.
-                passwd=argv[2],  # User password.
+                user=sys.argv[1],  # The database username.
+                passwd=sys.argv[2],  # User password.
                 host="localhost",  # Location of the db
                 charset="utf8",  # Character set used in the database.
                 port=3306,  # Port to be used for connections
-                db=argv[3])  # Database to be used for connection.
+                db=sys.argv[3])  # Database to be used for connection.
     cur = conn.cursor()  # Creating cursor object
     # Execute the query to the database
     rows = cur.execute(f"SELECT * FROM states WHERE name = '{argv[4]}'\
