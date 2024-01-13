@@ -22,9 +22,8 @@ if __name__ == "__main__":  # Execute only if run as script
                 db=sys.argv[3],  # Database to be used for connection.
                 charset="utf8")  # Character set used in the database.
     cur = conn.cursor()  # Creating cursor object
-    cur.execute(
-        "SELECT * FROM states WHERE name = '{}'\
-        ORDER BY id ASC".format(sys.argv[4]))  # Execute the query to the database
+    cur.execute("SELECT * FROM states WHERE name = '{}'\
+    ORDER BY id ASC".format(sys.argv[4]))  # Execute the query to the database
     rows = cur.fetchall()  # Fetch all the data returned by the query
     for row in rows:  # Loop through all rows
         if row[1] == sys.argv[4]:  # Check if the row matches the state name
