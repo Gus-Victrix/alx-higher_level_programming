@@ -1,29 +1,32 @@
 #!/usr/bin/python3
 
 """
-Select all the state that match with the 4 parameter
+Display all values in states table of hbtn_0e_0_usa where name matches argv[4].
+
+Usage: ./0-select_states.py <username> <password> <database name> <state name>
 """
 
-import MySQLdb
-import sys
+if __name__ == "__main__":  # Execute only if run as script
+    import sys  # Exit error and commandline arguemnts access
+    import MySQLdb  # Connecting to mysql database.
 
-if "__main__" == __name__:
-    conn = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        charset="utf8",
-    )
-    cur = conn.cursor()
-    cur.execute(
-        "SELECT * FROM states WHERE name LIKE '{}'\
-        ORDER BY id ASC".format(sys.argv[4])
-    )
-    query_rows = cur.fetchall()
-    for row in query_rows:
-        if row[1] == sys.argv[4]:
-            print(row)
-    cur.close()
-    conn.close()
+    if len(sys.argv) != 5:  # Check if the user input is valid
+        print(__doc__)  # Print the documentation
+        sys.exit(1)  # Exit with error
+
+    conn = MySQLdb.connect(  # Connecting to MySQL database
+                username=argv[1],  # The database username.
+                passwd=argv[2],  # User password.
+                host="localhost",  # Location of the db
+                charset="utf8",  # Character set used in the database.
+                port=3306,  # Port to be used for connections
+                db=argv[3])  # Database to be used for connection.
+    cur = conn.cursor()  # Creating cursor object
+    # Execute the query to the database
+    rows = cur.execute(f"SELECT * FROM states WHERE name = '{argv[4]}'\
+            ORDER BY id ASC;")
+    for row in rows:  # Loop through all rows
+        print(row)  # Print each row
+
+    cur.close()  # Close all cursors
+    conn.close()  # Close all databases
