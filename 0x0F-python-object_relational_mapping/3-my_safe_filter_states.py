@@ -28,8 +28,9 @@ if __name__ == "__main__":  # Execute only if run as script
                 db=argv[3])  # Database to be used for connection.
     cur = conn.cursor()  # Creating cursor object
     # Execute the query to the database
-    rows = cur.execute("SELECT * FROM states WHERE name = '{}'\
+    cur.execute("SELECT * FROM states WHERE name = '{}'\
             ORDER BY id ASC".format(argv[4]))
+    rows = cur.fetchall()  # Fetch all the rows in a list
     for row in rows:  # Loop through all rows
         if row[1] == argv[4]:  # Check if the row matches the state name
             print(row)  # Print each row
