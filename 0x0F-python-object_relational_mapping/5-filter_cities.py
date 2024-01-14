@@ -1,28 +1,40 @@
 #!/usr/bin/python3
 
 """
-List of the cities of the 4 argurment
+Lists all cities from the state in database hbtn_0e_4_usa
+
+Usage: ./4-cities_by_state.py <mysql username> <user password> <database name>
+        <state name searched>
 """
 
-import MySQLdb
-import sys
+if __name__ == "__main__":
+    from sys import argv, exit
+    import MySQLdb as ms
 
-if "__main__" == __name__:
-    conn = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        charset="utf8",
-    )
-    cur = conn.cursor()
+    if len(argv) != 5:
+        print(__doc__)
+        exit(1)
+
+    conn = ms.connect(  # Creating database connection
+        host="localhost", # Hostname
+        user=argv[1],     # Username
+        passwd=argv[2],   # Password
+        db=argv[3],       # Database name
+        port=3306)        # Port number
+
+    cur = conn.cursor()  # Cursor object
+
     cur.execute(
-        "SELECT cities.name FROM cities JOIN states WHERE states.id =\
-            cities.state_id AND states.name = %s",
-        (sys.argv[4],),
-    )
-    query_rows = cur.fetchall()
-    print(", ".join(row[0] for row in query_rows))
-    cur.close()
-    conn.close()
+    "SELECT c.name\
+    FROM cities c JOIN states s\
+    ON c.state_id = s.id\
+    WHERE s.name = %s\
+    ORDER BY c.id ASC", (argv[4],))  # Executing query
+
+    rows = cur.fetchall()  # Fetching all rows
+
+
+    print(', '.join(row[0] for row in rows)) # Printing combined rows
+
+    cur.close()       # Closing cursor
+    conn.close()      # Closing connection
