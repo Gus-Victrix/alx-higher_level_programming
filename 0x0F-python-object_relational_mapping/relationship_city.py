@@ -27,7 +27,7 @@ class City(Base):
         state_id (sqlalchemy.Integer): The state's id that the city is in.
     """
     __tablename__ = "cities"  # The name of the MySQL table to store Cities.
-    id = Column(Integer, primary_key=True, autoincrement=True)  # The city's id
+    id = Column(Integer, primary_key=True)  # The city's id
     name = Column(String(128), nullable=False)  # The city's name
     # The id of the city's state, must be an existing state id
-    state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
+    state_id = Column(Integer, ForeignKey('states.id'))
