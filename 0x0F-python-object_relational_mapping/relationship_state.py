@@ -8,6 +8,7 @@ Attributes:
 -----------
     id (int): The id of the state.
     name (str): The name of the state.
+    cities (sqlalchemy.orm.relationship): The state's cities.
 """
 
 from sqlalchemy.orm import relationship  # For creating relationships
@@ -32,4 +33,4 @@ class State(Base):
     __tablename__ = "cities"  # The name of the MySQL table to store Cities.
     id = Column(Integer, primary_key=True, autoincrement=True)  # The city's id
     name = Column(String(128), nullable=False)  # The city's name
-    cities = relationship("City", back_populates="state", cascade='all,delete')
+    cities = relationship("City", backref="state") # The state's cities
