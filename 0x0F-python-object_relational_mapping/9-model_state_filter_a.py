@@ -13,7 +13,7 @@ Args:
 
 if __name__ == "__main__":  # Import guard
     from sys import argv, exit  # For terminal arguments and error handling
-    from sqlalchemy.orm import Session  # To create a session manager
+    from sqlalchemy.orm import Session  # To create a sesssion manager
     from sqlalchemy import create_engine  # To create a connection to the DB
     from model_state import Base, State  # Objects being managed by db
 
@@ -28,12 +28,11 @@ if __name__ == "__main__":  # Import guard
             pool_pre_ping=True)  # Check connections before passing them
 
     Base.metadata.create_all(engine)  # Create tables for declared objects
-    session = Session(engine)  # Starting a db access session
+    ses = Session(engine)  # Starting a db access session
 
-    states = session.query(State).\
-        filter(State.name.like("%a%")).\
-        order_by(State.id)  # Order by id
+    # Querying the db for all the states with an 'a' in the name
+    states = ses.query(State).filter(State.name.like("%a%")).order_by(State.id)
 
-    for state in states:  # Print all the states
-        print(f"{state.id}: {state.name}")
-    session.close()  # Close the session
+    for state in states:  # Iterate over returned states
+        print(f"{state.id}: {state.name}")  # Print the state
+    ses.close()  # Close the sesssion
