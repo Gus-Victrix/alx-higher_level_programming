@@ -11,19 +11,16 @@ Arguments:
     database name: name of the database
     state name: name of the state to search
 """
-from sys import argv, exit  # To collect user input and handle errors
+from sys import argv  # To collect user input
 from model_state import Base, State  # To access the State class
 from sqlalchemy import create_engine  # To connect to the db
 from sqlalchemy.orm import Session  # To communicate with the db
 
 
 if __name__ == "__main__":  # Execute only if run as a script
-    if len(argv) != 5:  # If the number of arguments is not 4
-        print(__doc__)
-        exit(1)
     user, pw, db, state = argv[1:]  # Unpack the arguments
     engine = create_engine(  # Connect to the db
-        "mysql+mysqldb://{user}:{pw}@localhost/{db}",  # URI
+        f"mysql+mysqldb://{user}:{pw}@localhost/{db}",  # URI
         pool_pre_ping=True)  # Test connections before handing them out
     Base.metadata.create_all(engine)  # Create metadata tables in db
     sess = Session(engine)  # Instantiate Session class
