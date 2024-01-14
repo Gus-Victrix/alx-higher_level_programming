@@ -23,13 +23,16 @@ if __name__ == "__main__":  # Execute only if run as a script
         "mysql+mysqldb://{user}:{pw}@localhost/{db}",  # URI
         pool_pre_ping=True)  # Test connections before handing them out
     Base.metadata.create_all(engine)  # Create metadata tables in db
-    session = Session(engine)  # Instantiate Session class
+    sess = Session(engine)  # Instantiate Session class
 
     # Query the db for the State object with the name passed as argument
-    state = session.query(State).filter(State.name == state).first()
-    if state:  # If the state exists
-        print(f"{state.id}")  # Print the state id
-    else:  # If the state doesn't exist
+    states = sess.query(State).filter(State.name == state).order_by(State.id)
+    found = False  # Flag to indicate if the state was found
+    for state in states:
+        if state:
+            print(f"{state.id}")  # Print the state id
+            found = True  # Set a flag to indicate the state was found
+            break
+    if not found:  # If the state doesn't exist
         print("Not found")  # Print an error message
-
-    session.close()  # Close the connection to the db
+    sess.close()  # Close the connection to the db
