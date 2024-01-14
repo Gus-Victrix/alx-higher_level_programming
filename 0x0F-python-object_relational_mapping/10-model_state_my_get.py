@@ -25,10 +25,10 @@ if __name__ == "__main__":  # Execute only if run as a script
     Base.metadata.create_all(engine)  # Create metadata tables in db
     sess = Session(engine)  # Instantiate Session class
 
-    # Query the db for the State object with the name passed as argument
-    states = sess.query(State).filter(State.name == state).order_by(State.id)
     found = False  # Flag to indicate if the state was found
-    for state in states:
+    # Query the db for the State object with the name passed as argument
+    for state in (
+            sess.query(State).filter(State.name == state).order_by(State.id)):
         if state:
             print(f"{state.id}")  # Print the state id
             found = True  # Set a flag to indicate the state was found
