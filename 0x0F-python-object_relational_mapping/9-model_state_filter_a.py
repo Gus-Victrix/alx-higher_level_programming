@@ -31,7 +31,10 @@ if __name__ == "__main__":  # Import guard
     ses = Session(engine)  # Starting a db access session
 
     # Querying the db for all the states with an 'a' in the name
-    states = ses.query(State).filter(State.name.like("%a%")).order_by(State.id)
+    states = ses.query(State).filter(or_(
+        State.name.like("%a%"),
+        State.name.like("%a"),
+        State.name.like("a%"))).order_by(State.id)
 
     for state in states:  # Iterate over returned states
         print(f"{state.id}: {state.name}")  # Print the state
