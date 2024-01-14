@@ -14,7 +14,7 @@ Args:
 if __name__ == "__main__":  # Import guard.
     from sys import argv, exit  # For CLI arguments and error handling.
     from sqlalchemy import create_engine  # To connect to the database.
-    from sqlalchemy.orm import sessionmaker  # To create 'session' manager.
+    from sqlalchemy.orm import Session  # To handle sessions.
     from model_state import Base, State  # To access the table 'states'.
 
     if len(argv) != 4:
@@ -28,14 +28,8 @@ if __name__ == "__main__":  # Import guard.
 
     Base.metadata.create_all(engine)  # Create metadata and tables.
 
-    Session = sessionmaker(  # Starting a db access session class.
-         bind=engine,  # Select the engine to be used for the session.
-         expire_on_commit=True,  # Objects reloaded after every commit.
-         autoflush=True,  # Sync with database on every query.
-         autocommit=True)  # Every query is a transaction.
-
-    session = Session()  # Create a Session instance.
-    states = session.query(State).order_by(State.id.asc())  # Query the table.
+    session = Session(engine)  # Create a Session instance bound to engine.
+    states = session.query(State).order_by(State.id)  # Query the table.
     for state in states:  # Iterate over the result.
         print(f"{state.id}: {state.name}")  # Print the result.
 
