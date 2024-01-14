@@ -12,7 +12,7 @@ Attributes:
 """
 
 from sqlalchemy.orm import relationship  # For creating relationships
-from sqlalchemy import Column, Integer, String, ForeignKey  # For db ops
+from sqlalchemy import Column, Integer, String  # For db ops
 from sqlalchemy.ext.declarative import declarative_base  # For base class
 
 Base = declarative_base()  # Create a declarative base class
@@ -31,6 +31,6 @@ class State(Base):
         cities (sqlalchemy.orm.relationship): The state's cities.
     """
     __tablename__ = "cities"  # The name of the MySQL table to store Cities.
-    id = Column(Integer, primary_key=True, autoincrement=True)  # The city's id
+    id = Column(Integer, primary_key=True)  # The city's id
     name = Column(String(128), nullable=False)  # The city's name
     cities = relationship("City", backref="state") # The state's cities
