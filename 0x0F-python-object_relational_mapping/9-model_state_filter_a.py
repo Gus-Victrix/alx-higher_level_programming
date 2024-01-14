@@ -1,41 +1,27 @@
 #!/usr/bin/python3
 
 """
-Show all the states in the database that contain the letter a.
-
-Usage: ./test.py <username> <password> <database name>
-
-Args:
-    username - username to connect the mySQL
-    password - password to connect the mySQL
-    database - Name of the database
+Display all the cities with a inside
 """
 
-if __name__ == "__main__":  # Import guard
-    from sys import argv, exit  # For terminal arguments and error handling
-    from sqlalchemy.orm import Session  # To create a sesssion manager
-    from sqlalchemy import create_engine  # To create a connection to the DB
-    from model_state import Base, State  # Objects being managed by db
+import sys
+from model_state import Base, State
 
-    if len(argv) != 4:  # Check for correct number of arguments
-        print(__doc__)  # Print the documentation
-        exit(1)  # Exit with error
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
 
-    user, pw, db = argv[1:]  # Spreading argv into variables.
-
+if __name__ == "__main__":
     engine = create_engine(
-            f"mysql+mysqldb://{usr}:{pw}@localhost:3306/{db}",
-            pool_pre_ping=True)  # Check connections before passing them
+        "mysql+mysqldb://{}:{}@localhost/{}".format(
+            sys.argv[1], sys.argv[2], sys.argv[3]
+        ),
+        pool_pre_ping=True,
+    )
+    Base.metadata.create_all(engine)
 
-    Base.metadata.create_all(engine)  # Create tables for declared objects
-    ses = Session(engine)  # Starting a db access session
-
-    # Querying the db for all the states with an 'a' in the name
-    states = ses.query(State).filter(or_(
-        State.name.like("%a%"),
-        State.name.like("%a"),
-        State.name.like("a%"))).order_by(State.id)
-
-    for state in states:  # Iterate over returned states
-        print(f"{state.id}: {state.name}")  # Print the state
-    ses.close()  # Close the sesssion
+    session = Session(engine)
+    states = session.query(State).filter(State.name.like('%a%')).\
+        order_by(State.id)
+    for state in states:
+        print(f"{state.id}: {state.name}")
+    session.close()
