@@ -14,7 +14,7 @@ Attributes:
 
 from sqlalchemy.orm import relationship  # For creating relationships
 from sqlalchemy import Column, Integer, String, ForeignKey  # For db ops
-from relationship_state import Base, State  # For declarative base and state table
+from relationship_state import Base, State  # Declarative base & state table
 
 
 class City(Base):
@@ -39,4 +39,4 @@ class City(Base):
         nullable=False,  # Can't be empty
         onupdate="CASCADE",  # If state id updates, update this too
         ondelete="CASCADE")  # If state is deleted, delete this too
-    state = relationship("State", back_populates="cities") # Easy state access
+    state = relationship("State", back_populates="cities")  # Easy state access
