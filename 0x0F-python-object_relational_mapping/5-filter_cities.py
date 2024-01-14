@@ -14,27 +14,20 @@ if __name__ == "__main__":
     if len(argv) != 5:
         print(__doc__)
         exit(1)
-
-    conn = ms.connect(  # Creating database connection
-        host="localhost", # Hostname
-        user=argv[1],     # Username
-        passwd=argv[2],   # Password
-        db=argv[3],       # Database name
-        port=3306)        # Port number
-
-    cur = conn.cursor()  # Cursor object
-
+    conn = ms.connect(     # Creating database connection
+        host="localhost",  # Hostname
+        user=argv[1],      # Username
+        passwd=argv[2],    # Password
+        db=argv[3],        # Database name
+        port=3306)         # Port number
+    cur = conn.cursor()    # Cursor object
     cur.execute(
-    "SELECT c.name\
-    FROM cities c JOIN states s\
-    ON c.state_id = s.id\
-    WHERE s.name = %s\
-    ORDER BY c.id ASC", (argv[4],))  # Executing query
-
+        "SELECT c.name\
+         FROM cities c JOIN states s\
+         ON c.state_id = s.id\
+         WHERE s.name = %s\
+         ORDER BY c.id ASC", (argv[4],))  # Executing query
     rows = cur.fetchall()  # Fetching all rows
-
-
-    print(', '.join(row[0] for row in rows)) # Printing combined rows
-
+    print(', '.join(row[0] for row in rows))  # Printing combined rows
     cur.close()       # Closing cursor
     conn.close()      # Closing connection
