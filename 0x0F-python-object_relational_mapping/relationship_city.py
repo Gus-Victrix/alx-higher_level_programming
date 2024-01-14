@@ -9,11 +9,12 @@ Attributes:
     id (int): The id of the city.
     name (str): The name of the city.
     state_id (int): The id of the state that the city is in.
+    state (State): The state that the city is in.
 """
 
 from sqlalchemy.orm import relationship  # For creating relationships
 from sqlalchemy import Column, Integer, String, ForeignKey  # For db ops
-from model_state import Base, State  # For declarative base and state table
+from relationship_state import Base, State  # For declarative base and state table
 
 
 class City(Base):
