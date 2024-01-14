@@ -11,7 +11,7 @@ Attributes:
 """
 
 from sqlalchemy import Column, Integer, String, ForeignKey  # For db ops
-from relationship_state import Base, State  # For declarative base and state
+from model_state import Base, State  # For declarative base and state table
 
 
 class City(Base):
