@@ -18,6 +18,9 @@ from sqlalchemy.orm import Session  # To communicate with the db
 
 
 if __name__ == "__main__":  # Execute only if run as a script
+    if len(argv) != 5:  # If the number of arguments is not 4
+        print(__doc__)
+        exit(1)
     user, pw, db, state = argv[1:]  # Unpack the arguments
     engine = create_engine(  # Connect to the db
         "mysql+mysqldb://{user}:{pw}@localhost/{db}",  # URI
