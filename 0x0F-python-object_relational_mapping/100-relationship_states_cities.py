@@ -26,9 +26,13 @@ if __name__ == "__main__":  # Execute only if run as a script
         f"mysql+mysqldb://{user}:{pw}@localhost:3306/{db}",  # URI
         pool_pre_ping=True)  # Test connections before handing them out
     Base.metadata.create_all(engine)  # Create metadata tables in db
-    sess = Session(engine)  # Instantiate Session class
 
+    new_state = State(name="California")  # Create a new State object
+    new_city = City(name="San Francisco")  # Create a new City object
+    new_state.cities.append(new_city)  # Append City object to State object
+
+    sess = Session(engine)  # Instantiate Session class
     # Create a new State object with existing City object
-    sess.add(State(name="California", cities=[City(name="San Francisco")]))
+    sess.add(new_state) # Add the new State object to the session
     sess.commit()  # Save changes to db
     sess.close()  # Close the connection
