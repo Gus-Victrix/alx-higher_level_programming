@@ -28,12 +28,10 @@ if __name__ == "__main__":  # Execute only if run as a script
         pool_pre_ping=True)  # Test connections before handing them out
     Base.metadata.create_all(engine)  # Create metadata tables in db
 
-    new_state = State(name="California")  # Create a new State object
-    new_city = City(name="San Francisco")  # Create a new City object
-    new_state.cities.append(new_city)  # Append City object to State object
-
     sess = Session(engine)  # Instantiate Session class
-    # Create a new State object with existing City object
+    new_state = State(name="California")  # Create a new State object
+    # Create a new City object and append it to the State object
+    new_state.cities.append(City(name="San Francisco"))
     sess.add(new_state) # Add the new State object to the session
     sess.commit()  # Save changes to db
     sess.close()  # Close the connection
