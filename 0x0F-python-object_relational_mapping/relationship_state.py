@@ -30,7 +30,7 @@ class State(Base):
         name (sqlalchemy.String): The state's name.
         cities (sqlalchemy.orm.relationship): The state's cities.
     """
-    __tablename__ = "cities"  # The name of the MySQL table to store Cities.
+    __tablename__ = "states"  # The name of the MySQL table to store Cities.
     id = Column(Integer, primary_key=True)  # The city's id
     name = Column(String(128), nullable=False)  # The city's name
     cities = relationship("City", backref="state") # The state's cities
