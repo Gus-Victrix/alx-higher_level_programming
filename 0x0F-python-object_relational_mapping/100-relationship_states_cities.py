@@ -14,7 +14,8 @@ Arguments:
 
 if __name__ == "__main__":  # Execute only if run as a script
     from sys import argv, exit  # To collect user input and exit
-    from relationship_city import Base, State, City
+    from relationship_city import Base, City
+    from relationship_state import State
     from sqlalchemy import create_engine  # To connect to the db
     from sqlalchemy.orm import Session  # To communicate with the db
 
