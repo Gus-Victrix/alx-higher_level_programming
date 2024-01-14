@@ -32,4 +32,4 @@ class State(Base):
     __tablename__ = "cities"  # The name of the MySQL table to store Cities.
     id = Column(Integer, primary_key=True, autoincrement=True)  # The city's id
     name = Column(String(128), nullable=False)  # The city's name
-    cities = relationship("City", back_populates="state")  # Easy state access
+    cities = relationship("City", back_populates="state", cascade='all,delete')
