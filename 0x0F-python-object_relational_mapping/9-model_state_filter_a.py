@@ -1,27 +1,39 @@
 #!/usr/bin/python3
 
 """
-Display all the cities with a inside
+Show all the states in the database that contain the letter a.
+
+Usage: ./test.py <username> <password> <database name>
+
+Args:
+    username - username to connect the mySQL
+    password - password to connect the mySQL
+    database - Name of the database
 """
 
-import sys
-from model_state import Base, State
+if __name__ == "__main__":  # Import guard
+    from sys import argv, exit  # For terminal arguments and error handling
+    from sqlalchemy.orm import Session  # To create a session manager
+    from sqlalchemy import create_engine  # To create a connection to the DB
+    from model_state import Base, State  # Objects being managed by db
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+    if len(argv) != 4:  # Check for correct number of arguments
+        print(__doc__)  # Print the documentation
+        exit(1)  # Exit with error
 
-if __name__ == "__main__":
+    user, pw, db = argv[1:]  # Spreading argv into variables.
+
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost/{}".format(
-            sys.argv[1], sys.argv[2], sys.argv[3]
-        ),
-        pool_pre_ping=True,
-    )
-    Base.metadata.create_all(engine)
+            f"mysql+mysqldb://{usr}:{pw}@localhost:3306/{db}",
+            pool_pre_ping=True)  # Check connections before passing them
 
-    session = Session(engine)
-    states = session.query(State).filter(State.name.like('%a%')).\
-        order_by(State.id)
-    for state in states:
+    Base.metadata.create_all(engine)  # Create tables for declared objects
+    session = Session(engine)  # Starting a db access session
+
+    states = session.query(State).\
+        filter(State.name.like("%a%")).\
+        order_by(State.id)  # Order by id
+
+    for state in states:  # Print all the states
         print(f"{state.id}: {state.name}")
-    session.close()
+    session.close()  # Close the session
