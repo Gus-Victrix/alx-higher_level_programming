@@ -30,7 +30,7 @@ if __name__ == "__main__":  # Execute only if run as a script
 
     # Fetch all City objects from the db and print them joined with State
     rows = sess.query(State, City).\
-        filter(State.id == City.state_id).order_by(City.id).all()
+        filter(State.id == City.state_id).order_by(City.id)
 
     for state, city in rows:
         print(f"{state.name}: ({city.id}) {city.name}")
