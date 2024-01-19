@@ -22,9 +22,15 @@ class City(Base):
         state_id (int)
     """
 
-    __tablename__ = "cities"
-    id = Column(Integer, primary_key=True)
-    name = Column(String(128), nullable=False)
+    __tablename__ = "cities"  # MySQL table name
+    id = Column(  # MySQL id column
+        Integer,
+        primary_key=True,
+        autoincrement=True,
+        nullable=False,
+        unique=True,
+    )
+    name = Column(String(128), nullable=False)  # MySQL name column
     state_id = Column(
         Integer,
         ForeignKey("states.id"),
