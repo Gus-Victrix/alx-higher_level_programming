@@ -1,3 +1,3 @@
 #!/bin/bash
-# Prints "You got me!" after querying 0.0.0.0:5000/catch_me
-curl -s -w "You got me!"  0.0.0.0:5000/catch_me
+# Played the game, and got the answer lol
+curl -sL -H "Origin: School" -X PUT -d"user_id=98"  0.0.0.0:5000/catch_me_2
