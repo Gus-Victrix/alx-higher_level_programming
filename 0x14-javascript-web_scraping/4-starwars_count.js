@@ -1,24 +1,12 @@
 #!/usr/bin/node
 
-const axios = require('axios');
-const URL = process.argv[2];
+const request = require('request');
 
-async function getMethod (URL) {
-  await axios.get(`${URL}`)
-    .then((res) => {
-      let counter = 0;
-      for (const film of res.data.results) {
-        for (const listActors of film.characters) {
-          if (listActors.includes('people/18/')) {
-            counter++;
-          }
-        }
-      }
-      console.log(counter);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}
-
-getMethod(URL);
+request(process.argv[2], function (error, response, body) {
+  if (!error) {
+    const result = JSON.parse(body).results;
+    console.log(result.reduce((count, movie) => {
+      return movie.characters.some((character) => character.includes('18')) ? count + 1 : count;
+    }, 0));
+  }
+});
