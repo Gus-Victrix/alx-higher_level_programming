@@ -1,22 +1,23 @@
 #!/usr/bin/node
-
-const axios = require('axios');
-
+// A script that prints all characters of a Star Wars movie
+const request = require('request');
 const id = process.argv[2];
-const URL = `https://swapi-api.hbtn.io/api/films/${id}`;
+const url = 'https://swapi-api.alx-tools.com/api/films/' + id;
 
-async function getMethod (URL) {
-  await axios.get(URL)
-    .then(async (res) => {
-      for (const characters of res.data.characters) {
-        await axios.get(characters)
-          .then((res) => {
-            console.log(res.data.name);
-          });
-      }
-    }).catch((err) => {
-      console.log(`code: ${err.response.status}`);
-    });
-}
-
-getMethod(URL);
+request.get(url, (error, response, body) => {
+  if (error) {
+    console.log(error);
+  } else {
+    const character = JSON.parse(body);
+    const innerChar = character.characters;
+    for (const i of innerChar) {
+      request.get(i, function (error, res, body1) {
+        if (error) {
+          console.log(error);
+        }
+        const data1 = JSON.parse(body1);
+        console.log(data1.name);
+      });
+    }
+  }
+});
