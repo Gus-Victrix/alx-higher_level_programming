@@ -1,25 +1,19 @@
 #!/usr/bin/node
 
-const axios = require('axios');
+const request = require('request');
 const fs = require('fs');
 
 const URL = process.argv[2];
 const pathFile = process.argv[3];
 
-async function resquestLoremAPI (URL, pathFile) {
-  await axios.get(URL)
-    .then((res) => {
-      if (res.status === 200) {
-        fs.writeFile(`./${pathFile}`, res.data, { flag: 'w+' }, err => {
-          if (err) {
-            console.error(err);
-          }
-        });
+request(URL, (error, response, body) => {
+  if (error) {
+    console.log(error);
+  } else {
+    fs.writeFile(pathFile, body, 'utf8', (err) => {
+      if (err) {
+        console.log(err);
       }
-    })
-    .catch((err) => {
-      console.error(err);
     });
-}
-
-resquestLoremAPI(URL, pathFile);
+  }
+});
